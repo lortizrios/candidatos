@@ -4,16 +4,14 @@
 function conectarBD(){
 
     // host, usuario, password, base de datos
-    $conexion = mysql_connect('localhost', 'root', 'root','papeleta');
+    $link= mysqli_connect('localhost', 'root', 'root', 'papeleta');
 
     // Verificar conexion
-    if (!$conexion){
-
+    if (!$link){
         die("Error en la conexión:".mysqli_connect_errno().' '.mysqli_connect_error());
-        
     }
 
-    return $conexion;
+    return $link;
 }
 
 ?>

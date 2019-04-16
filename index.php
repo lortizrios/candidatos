@@ -125,8 +125,6 @@
                     <button type="submit" class="btn btn-primary custom-select-lg" 
                     name="registrar" style="margin-bottom: 90px">Registrar Candidato
                     </button>
-                
-                    <a class="btn btn-primary btn-lg" href="candidatos-registrados.php" style="margin-bottom: 90px">Candidatos Registrados</a>
                     
                 </form>
                         

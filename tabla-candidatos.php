@@ -1,9 +1,11 @@
 <?php
 
     //script php 
-    require_once('conexion-bd.php');
+    require_once('conexion-bd.php');?>
 
-    $sql = "select * from candidatos" ; 
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+<?php    $sql = "select * from candidatos" ; 
 
     $con = conectarBD();
 
@@ -48,7 +50,7 @@
                 
                 //Si no tiene inicial imprime --- 
                 if ($row['inicial'] == null){
-                     echo "<td>" ."-----". "</td>\n";
+                     echo "<td>" ."------". "</td>\n";
                 }  else{//imprime inicial
                 echo "<td>" .$row['inicial'] . "</td>\n";
                 }
@@ -77,54 +79,22 @@
     }
 ?>
 
+    <button id="alert">Alert</button>
+
+    <script>
+    $('#alert').click(function(){
+
+    swal({
+            title: "Good job!",
+            text: "You clicked the button!",
+            icon: "success",
+            button: "Aww yiss!",
+        });
+        
+    });
+    </script> 
+
     
-
-    <!-- Modal Editar -->
-    <div class="modal fade" id="modal_editar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Eliminar Candidato</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-
-                <div class="modal-body">
-                    Editar Candidato <?php  $row['nombre'] ?>
-                </div>
-
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-primary">Si</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal borrar -->
-    <div class="modal fade" id="modal_borrar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Eliminar Candidato</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                
-                <div class="modal-body">
-                    Esta seguro que desea eliminar el candidato?
-                </div>
-
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-primary">Si</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
 <?php
 // cerrar la conexion
 mysqli_close($con);

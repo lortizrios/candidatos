@@ -15,7 +15,7 @@
         <!--Barra de navegacion-->
         <?php include("include/navbar.php"); ?>
 
-        <title>Candidatos</title>
+        <title>Ex-candidatos</title>
 
         <!--Imagen inter Bayamon-->
         <center>
@@ -24,41 +24,16 @@
     </head>
 
     <body class="container" >
-
+        
         <div style="margin-top: 15px" class="container table-responsive">
-            <div id="resultados"></div>
-            <div id="result"></div>
-            <br>
+        <h5>Ex-candidatos inactivos</h5>
+            <?php
+                require_once('year-row.php');
+            ?>
         </div>
-        <div id="resultados"></div>
+
         <script src="js/jquery.js"></script>
         <script src="js/bootstrap.min.js"></script>
         
     </body>
 </html>
-
-<script>
-  $(document).ready(function(){
-
-  load_data();
-
-    function load_data(query){
-      $.ajax({
-        url:"fetch.php",
-        method:"POST",
-        data:{query:query},
-        success:function(data){    
-          $('#result').html(data);
-        }
-      });
-    }
-    $('#search_text').keyup(function(){
-      var search = $(this).val();
-      if(search != ''){
-        load_data(search);
-      }else{
-        load_data();
-      }
-    });
-  });
-</script>

@@ -23,7 +23,7 @@
         </center>
     </head>
 
-    <body class="container" >
+    <body class="container">
 
         <div style="margin-top: 15px" class="container table-responsive">
             <div id="resultados"></div>

@@ -137,6 +137,7 @@
                 <div class="col-md-2">
                     <label for="posicion">Año*</label>
                     <select class="custom-select custom-select-lg mb-3" name="year" required>
+                        <option value="">Escoja el año...</option>
                         <option value="2019" name="year">2019</option>
                         <option value="2020" name="year">2020</option>
                         <option value="2021" name="year">2021</option>
@@ -148,6 +149,9 @@
                         <option value="2027" name="year">2027</option>
                         <option value="2028" name="year">2028</option>
                     </select>
+                    <div class="invalid-feedback">
+                        favor de escojer el año
+                    </div>
 
                     <div class="invalid-feedback">
                         Escoja Año*

@@ -54,16 +54,24 @@
             $row_dep = mysqli_fetch_array($result_dep);
             
             if($row_cand['stat'] !=0){
-                    $x;
-                    $x++;
+                $x;
+                $x++;
                 echo"<tr>";
-                    
-
+                    //Contador
                     echo"<td>".$x."</td>\n";
-                    if($row_cand['path'] == true){
-                        echo"<td>";?> <img src="<?php echo 'img/'.$row_cand['path']; ?>" 
-                        height="100px" width="100px"> <?php echo"</td>\n";
-                    }else{
+
+                    $directorio = opendir('img_candidatos');
+
+                    //Verifica si hay fotos y las muestra
+                    if($directorio){
+                        while($images = readdir($directorio)){
+                            if($images == $row_cand['path']){
+                                echo"<td><img src='img_candidatos/$images' height='100px' width='100px'></td>";
+                            }
+                        }
+                        
+                        //Si no tiene foto muestra un icono
+                    }if($row_cand['path'] != true){
                         echo"<td>";?> <img src="imagenes/candidato_icon.gif" 
                         height="100px" width="100px"> <?php echo"</td>\n";
                     }
@@ -72,8 +80,11 @@
                     echo"<td>".$row_cand["inicial"]."</td>\n";
                     echo"<td>".$row_cand["apellidos"]."</td>\n";
 
-                    if($num_estudiante == $row_cand['num_estudiante']){    
-                    echo "<td>".$row_dep['departamentos']."</td>";}
+                    if($row_cand['id'] == $row_dep['num_estudiante']){    
+                        echo "<td>".$row_dep['departamentos']."</td>\n";
+                    }else{
+                        echo"<td>No</td>";
+                    }
 
                     echo"<td>".$row_cand["puesto"]."</td>\n";
                     echo"<td>".$row_cand["posicion"]."</td>\n";

@@ -38,7 +38,7 @@
                     
                 while ( $row = mysqli_fetch_assoc($result) ){
 
-                    if( $row['stat'] == false){
+                    if( $row['stat'] == false ){
 
                         echo "<tr>\n";
                             echo"<td>";?> <img src="<?php echo 'img/'.$row['path']; ?>" height="100px" width="100px"> <?php echo"</td>";

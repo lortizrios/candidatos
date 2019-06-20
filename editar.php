@@ -12,7 +12,6 @@
     <!--CSS Bootsrap-->
     <link rel="stylesheet" href="css/bootstrap.min.css" >
 
- 
     <!--Validacion textbox-->
     <script type="text/javascript" src="validation.js"></script>
 
@@ -81,42 +80,244 @@
           </div>
         </div>
 
+        <?php
+          $desconocido = "Desconocido";
+          $natural_math = "Ciencias Naturales y Matemática";
+          $salud = "Ciencias de la Salud";
+          $aviacion = "Aeronáutica";
+          $es_hum = "Estudios Humanísticos";
+          $ad_empr = "Administración de Empresas";
+          $comun = "Comunicaciones";
+          $informatica = "Informática";
+          $ing_electrica = "Ing. Eléctrica";
+          $ing_industrial = "Ing. Industrial";
+          $ing_mecanica = "Ing. Mecánica";
+
+          $presidente = 'Presidente';
+          $vicepresidente = 'Vicepresidente';
+          $secretario = 'Secretario';
+          $tesorero = 'Tesorero';
+          $vocal = 'Vocal';
+          $senador = 'Senador';
+
+          $year_19 = "2019";
+          $year_20 = "2020";
+          $year_21 = "2021";
+          $year_22 = "2022";
+          $year_23 = "2023";
+          $year_24 = "2024";
+          $year_25 = "2025";
+          $year_26 = "2026";
+          $year_27 = "2027";
+          $year_28 = "2028";
+          $year_29 = "2029";
+        ?>
         <!--Opcion Departamento-->
         <div class="col-4" >
           <label for="departamento">Departamento*</label>
-          <select class="custom-select custom-select-lg mb-3" value="" name="departamento" id='dept' required>
-            <option value=" <?php echo $dep_departamento; ?> "><?php echo $dep_departamento; ?></option>
-            <option value="Desconocido" name="departamento">Desconocido</option>
-            <option value="Ciencias Naturales y Matemática" name="departamento">Ciencias Naturales y Matemática</option>
-            <option value="Ciencias de la Salud" name="departamento">Ciencias de la Salud</option><?php 
-            if($dep_departamento != Aeronáutica){
-              echo "<option value='Aeronáutica' name='departamento'>Aeronáutica</option>";
-            } ?>
-            <option value="Estudios Humanísticos" name="departamento">Estudios Humanísticos</option>
-            <option value="Administración de Empresas" name="departamento">Administración de Empresas</option>
-            <option value="Comunicaciones" name="departamento">Comunicaciones</option>
-            <option value="Informática" name="departamento">Informática</option>
-            <option value="Ing. Eléctrica" name="departamento">Ing. Eléctrica</option>
-            <option value="Ing. Industrial" name="departamento">Ing. Industrial</option>
-            <option value="Ing. Mecánica" name="departamento">Ing. Mecánica</option>
+          <select class="custom-select custom-select-lg mb-3" value="" name="departamento" id='dept' required> <?php
+
+            if($departamento == $desconocido){
+              echo"<option value='Desconocido' name='departamento'>Desconocido</option>";
+              echo"<option value='Ciencias Naturales y Matemática' name='departamento'>Ciencias Naturales y Matemática</option>";
+              echo"<option value='Ciencias de la Salud' name='departamento'>Ciencias de la Salud</option>";
+              echo"<option value='Aeronáutica' name='departamento'>Aeronáutica</option>";
+              echo"<option value='Estudios Humanísticos' name='departamento'>Estudios Humanísticos</option>";
+              echo"<option value='Administración de Empresas' name='departamento'>Administración de Empresas</option>";
+              echo"<option value='Comunicaciones' name='departamento'>Comunicaciones</option>";
+              echo "<option value='Informática' name='departamento'>Informática</option>";
+              echo"<option value='Ing. Eléctrica' name='departamento'>Ing. Eléctrica</option>";
+              echo"<option value='Ing. Industrial' name='departamento'>Ing. Industrial</option>";
+              echo"<option value='Ing. Mecánica' name='departamento'>Ing. Mecánica</option>";
+            }
+            else if($departamento == $natural_math){
+              echo"<option value='Ciencias Naturales y Matemática' name='departamento'>Ciencias Naturales y Matemática</option>";
+              echo"<option value='Desconocido' name='departamento'>Desconocido</option>";
+              echo"<option value='Ciencias de la Salud' name='departamento'>Ciencias de la Salud</option>";
+              echo"<option value='Aeronáutica' name='departamento'>Aeronáutica</option>";
+              echo"<option value='Estudios Humanísticos' name='departamento'>Estudios Humanísticos</option>";
+              echo"<option value='Administración de Empresas' name='departamento'>Administración de Empresas</option>";
+              echo"<option value='Comunicaciones' name='departamento'>Comunicaciones</option>";
+              echo "<option value='Informática' name='departamento'>Informática</option>";
+              echo"<option value='Ing. Eléctrica' name='departamento'>Ing. Eléctrica</option>";
+              echo"<option value='Ing. Industrial' name='departamento'>Ing. Industrial</option>";
+              echo"<option value='Ing. Mecánica' name='departamento'>Ing. Mecánica</option>";
+
+            }
+            else if($departamento == $salud){
+              echo"<option value='Ciencias de la Salud' name='departamento'>Ciencias de la Salud</option>";
+              echo"<option value='Ciencias Naturales y Matemática' name='departamento'>Ciencias Naturales y Matemática</option>";
+              echo"<option value='Desconocido' name='departamento'>Desconocido</option>";
+              echo"<option value='Aeronáutica' name='departamento'>Aeronáutica</option>";
+              echo"<option value='Estudios Humanísticos' name='departamento'>Estudios Humanísticos</option>";
+              echo"<option value='Administración de Empresas' name='departamento'>Administración de Empresas</option>";
+              echo"<option value='Comunicaciones' name='departamento'>Comunicaciones</option>";
+              echo "<option value='Informática' name='departamento'>Informática</option>";
+              echo"<option value='Ing. Eléctrica' name='departamento'>Ing. Eléctrica</option>";
+              echo"<option value='Ing. Industrial' name='departamento'>Ing. Industrial</option>";
+              echo"<option value='Ing. Mecánica' name='departamento'>Ing. Mecánica</option>";
+            }
+            else if($departamento == $aviacion){
+              echo"<option value='Aeronáutica' name='departamento'>Aeronáutica</option>";
+              echo"<option value='Ciencias Naturales y Matemática' name='departamento'>Ciencias Naturales y Matemática</option>";
+              echo"<option value='Desconocido' name='departamento'>Desconocido</option>";
+              echo"<option value='Ciencias de la Salud' name='departamento'>Ciencias de la Salud</option>";
+              echo"<option value='Estudios Humanísticos' name='departamento'>Estudios Humanísticos</option>";
+              echo"<option value='Administración de Empresas' name='departamento'>Administración de Empresas</option>";
+              echo"<option value='Comunicaciones' name='departamento'>Comunicaciones</option>";
+              echo "<option value='Informática' name='departamento'>Informática</option>";
+              echo"<option value='Ing. Eléctrica' name='departamento'>Ing. Eléctrica</option>";
+              echo"<option value='Ing. Industrial' name='departamento'>Ing. Industrial</option>";
+              echo"<option value='Ing. Mecánica' name='departamento'>Ing. Mecánica</option>";
+            }
+            else if($departamento == $es_hum){
+              echo"<option value='Estudios Humanísticos' name='departamento'>Estudios Humanísticos</option>";
+              echo"<option value='Ciencias Naturales y Matemática' name='departamento'>Ciencias Naturales y Matemática</option>";
+              echo"<option value='Desconocido' name='departamento'>Desconocido</option>";
+              echo"<option value='Ciencias de la Salud' name='departamento'>Ciencias de la Salud</option>";
+              echo"<option value='Aeronáutica' name='departamento'>Aeronáutica</option>";
+              echo"<option value='Administración de Empresas' name='departamento'>Administración de Empresas</option>";
+              echo"<option value='Comunicaciones' name='departamento'>Comunicaciones</option>";
+              echo "<option value='Informática' name='departamento'>Informática</option>";
+              echo"<option value='Ing. Eléctrica' name='departamento'>Ing. Eléctrica</option>";
+              echo"<option value='Ing. Industrial' name='departamento'>Ing. Industrial</option>";
+              echo"<option value='Ing. Mecánica' name='departamento'>Ing. Mecánica</option>";
+            } 
+            else if($departamento == $ad_empr){
+              echo"<option value='Administración de Empresas' name='departamento'>Administración de Empresas</option>";
+              echo"<option value='Ciencias Naturales y Matemática' name='departamento'>Ciencias Naturales y Matemática</option>";
+              echo"<option value='Desconocido' name='departamento'>Desconocido</option>";
+              echo"<option value='Ciencias de la Salud' name='departamento'>Ciencias de la Salud</option>";
+              echo"<option value='Aeronáutica' name='departamento'>Aeronáutica</option>";
+              echo"<option value='Estudios Humanísticos' name='departamento'>Estudios Humanísticos</option>";
+              echo"<option value='Comunicaciones' name='departamento'>Comunicaciones</option>";
+              echo "<option value='Informática' name='departamento'>Informática</option>";
+              echo"<option value='Ing. Eléctrica' name='departamento'>Ing. Eléctrica</option>";
+              echo"<option value='Ing. Industrial' name='departamento'>Ing. Industrial</option>";
+              echo"<option value='Ing. Mecánica' name='departamento'>Ing. Mecánica</option>";
+            }
+            else if($departamento == $comun){
+              echo"<option value='Comunicaciones' name='departamento'>Comunicaciones</option>";
+              echo"<option value='Ciencias Naturales y Matemática' name='departamento'>Ciencias Naturales y Matemática</option>";
+              echo"<option value='Desconocido' name='departamento'>Desconocido</option>";
+              echo"<option value='Ciencias de la Salud' name='departamento'>Ciencias de la Salud</option>";
+              echo"<option value='Aeronáutica' name='departamento'>Aeronáutica</option>";
+              echo"<option value='Estudios Humanísticos' name='departamento'>Estudios Humanísticos</option>";
+              echo"<option value='Administración de Empresas' name='departamento'>Administración de Empresas</option>";
+              echo "<option value='Informática' name='departamento'>Informática</option>";
+              echo"<option value='Ing. Eléctrica' name='departamento'>Ing. Eléctrica</option>";
+              echo"<option value='Ing. Industrial' name='departamento'>Ing. Industrial</option>";
+              echo"<option value='Ing. Mecánica' name='departamento'>Ing. Mecánica</option>";
+            }
+            else if($departamento == $informatica){
+              echo "<option value='Informática' name='departamento'>Informática</option>";
+              echo"<option value='Ciencias Naturales y Matemática' name='departamento'>Ciencias Naturales y Matemática</option>";
+              echo"<option value='Desconocido' name='departamento'>Desconocido</option>";
+              echo"<option value='Ciencias de la Salud' name='departamento'>Ciencias de la Salud</option>";
+              echo"<option value='Aeronáutica' name='departamento'>Aeronáutica</option>";
+              echo"<option value='Estudios Humanísticos' name='departamento'>Estudios Humanísticos</option>";
+              echo"<option value='Administración de Empresas' name='departamento'>Administración de Empresas</option>";
+              echo"<option value='Comunicaciones' name='departamento'>Comunicaciones</option>";
+              echo"<option value='Ing. Eléctrica' name='departamento'>Ing. Eléctrica</option>";
+              echo"<option value='Ing. Industrial' name='departamento'>Ing. Industrial</option>";
+              echo"<option value='Ing. Mecánica' name='departamento'>Ing. Mecánica</option>";
+
+            }
+            else if($departamento == $ing_electrica){
+              echo"<option value='Ing. Eléctrica' name='departamento'>Ing. Eléctrica</option>";
+              echo"<option value='Ciencias Naturales y Matemática' name='departamento'>Ciencias Naturales y Matemática</option>";
+              echo"<option value='Desconocido' name='departamento'>Desconocido</option>";
+              echo"<option value='Ciencias de la Salud' name='departamento'>Ciencias de la Salud</option>";
+              echo"<option value='Aeronáutica' name='departamento'>Aeronáutica</option>";
+              echo"<option value='Estudios Humanísticos' name='departamento'>Estudios Humanísticos</option>";
+              echo"<option value='Administración de Empresas' name='departamento'>Administración de Empresas</option>";
+              echo"<option value='Comunicaciones' name='departamento'>Comunicaciones</option>";
+              echo "<option value='Informática' name='departamento'>Informática</option>";
+              echo"<option value='Ing. Industrial' name='departamento'>Ing. Industrial</option>";
+              echo"<option value='Ing. Mecánica' name='departamento'>Ing. Mecánica</option>";
+            }
+            else if($departamento == $ing_industrial){
+              echo"<option value='Ing. Industrial' name='departamento'>Ing. Industrial</option>";
+              echo"<option value='Ciencias Naturales y Matemática' name='departamento'>Ciencias Naturales y Matemática</option>";
+              echo"<option value='Desconocido' name='departamento'>Desconocido</option>";
+              echo"<option value='Ciencias de la Salud' name='departamento'>Ciencias de la Salud</option>";
+              echo"<option value='Aeronáutica' name='departamento'>Aeronáutica</option>";
+              echo"<option value='Estudios Humanísticos' name='departamento'>Estudios Humanísticos</option>";
+              echo"<option value='Administración de Empresas' name='departamento'>Administración de Empresas</option>";
+              echo"<option value='Comunicaciones' name='departamento'>Comunicaciones</option>";
+              echo "<option value='Informática' name='departamento'>Informática</option>";
+              echo"<option value='Ing. Eléctrica' name='departamento'>Ing. Eléctrica</option>";
+              echo"<option value='Ing. Mecánica' name='departamento'>Ing. Mecánica</option>";
+            }
+            else if($departamento == $ing_mecanica){
+              echo"<option value='Ing. Mecánica' name='departamento'>Ing. Mecánica</option>";
+              echo"<option value='Ciencias Naturales y Matemática' name='departamento'>Ciencias Naturales y Matemática</option>";
+              echo"<option value='Desconocido' name='departamento'>Desconocido</option>";
+              echo"<option value='Ciencias de la Salud' name='departamento'>Ciencias de la Salud</option>";
+              echo"<option value='Aeronáutica' name='departamento'>Aeronáutica</option>";
+              echo"<option value='Estudios Humanísticos' name='departamento'>Estudios Humanísticos</option>";
+              echo"<option value='Administración de Empresas' name='departamento'>Administración de Empresas</option>";
+              echo"<option value='Comunicaciones' name='departamento'>Comunicaciones</option>";
+              echo "<option value='Informática' name='departamento'>Informática</option>";
+              echo"<option value='Ing. Eléctrica' name='departamento'>Ing. Eléctrica</option>";
+              echo"<option value='Ing. Industrial' name='departamento'>Ing. Industrial</option>";
+            }?>
+
           </select>
-            
-          <div class="invalid-feedback">
-            favor de escojer el departamento
-          </div>
         </div>
 
         <!--Opcion Puesto-->
         <div class="col-4">
           <label for="puesto">Puesto*</label>
-          <select class="custom-select custom-select-lg mb-3" name="puesto" required>
-            <option value="">Escoja el puesto...</option>
-            <option value="1" name="puesto">Presidente</option>
-            <option value="2" name="puesto">Vicepresidente</option>
-            <option value="3" name="puesto">Secretario</option>
-            <option value="4" name="puesto">Tesorero</option>
-            <option value="5" name="puesto">Vocal</option>
-            <option value="6" name="puesto">Senador</option>
+          <select class="custom-select custom-select-lg mb-3" name="puesto" required><?php
+          if($puesto == $presidente){
+            echo"<option value='1' name='puesto'>Presidente</option>";
+            echo"<option value='2' name='puesto'>Vicepresidente</option>";
+            echo"<option value='3' name='puesto'>Secretario</option>";
+            echo"<option value='4' name='puesto'>Tesorero</option>";
+            echo"<option value='5' name='puesto'>Vocal</option>";
+            echo"<option value='6' name='puesto'>Senador</option>";
+          }
+          else if($puesto == $vicepresidente){
+            echo"<option value='2' name='puesto'>Vicepresidente</option>";
+            echo"<option value='1' name='puesto'>Presidente</option>";
+            echo"<option value='3' name='puesto'>Secretario</option>";
+            echo"<option value='4' name='puesto'>Tesorero</option>";
+            echo"<option value='5' name='puesto'>Vocal</option>";
+            echo"<option value='6' name='puesto'>Senador</option>";
+          }
+          else if($puesto == $secretario){
+            echo"<option value='3' name='puesto'>Secretario</option>";
+            echo"<option value='1' name='puesto'>Presidente</option>";
+            echo"<option value='2' name='puesto'>Vicepresidente</option>";
+            echo"<option value='4' name='puesto'>Tesorero</option>";
+            echo"<option value='5' name='puesto'>Vocal</option>";
+            echo"<option value='6' name='puesto'>Senador</option>";
+          }
+          else if($puesto == $tesorero){            
+            echo"<option value='4' name='puesto'>Tesorero</option>";
+            echo"<option value='1' name='puesto'>Presidente</option>";
+            echo"<option value='2' name='puesto'>Vicepresidente</option>";
+            echo"<option value='3' name='puesto'>Secretario</option>";
+            echo"<option value='5' name='puesto'>Vocal</option>";
+            echo"<option value='6' name='puesto'>Senador</option>";
+          }
+          else if($puesto == $vocal){
+            echo"<option value='5' name='puesto'>Vocal</option>";
+            echo"<option value='3' name='puesto'>Secretario</option>";
+            echo"<option value='1' name='puesto'>Presidente</option>";
+            echo"<option value='2' name='puesto'>Vicepresidente</option>";
+            echo"<option value='4' name='puesto'>Tesorero</option>";
+            echo"<option value='6' name='puesto'>Senador</option>";
+          }
+          else if($puesto == $senador){   
+            echo"<option value='6' name='puesto'>Senador</option>";
+            echo"<option value='3' name='puesto'>Secretario</option>";
+            echo"<option value='1' name='puesto'>Presidente</option>";
+            echo"<option value='2' name='puesto'>Vicepresidente</option>";
+            echo"<option value='4' name='puesto'>Tesorero</option>";
+            echo"<option value='5' name='puesto'>Vocal</option>";
+          }?>
           </select>
 
           <div class="invalid-feedback">
@@ -127,34 +328,170 @@
         <!--Opcion Posicion-->
         <div class="col-md-3">
           <label for="posicion">Posición*</label>
-          <select class="custom-select custom-select-lg mb-3" name="posicion" required>
-            <option value="">Escoja la posición...</option>
-            <option value="1" name="posicion">Primera posición</option>
-            <option value="2" name="posicion">Segunda posición</option>
-            <option value="3" name="posicion">Tercera posición</option>
-            <option value="4" name="posicion">Cuarta posición </option>
-            <option value="5" name="posicion">Quinta posición </option>
+          <select class="custom-select custom-select-lg mb-3" name="posicion" required> <?php
+            if($posicion == 1){
+              echo"<option value='1' name='posicion'>Primera posición</option>";
+              echo"<option value='2' name='posicion'>Segunda posición</option>";
+              echo"<option value='3' name='posicion'>Tercera posición</option>";
+              echo"<option value='4' name='posicion'>Cuarta posición</option>";
+              echo"<option value='5' name='posicion'>Quinta posición</option>";
+            }
+            if($posicion == 2){
+              echo"<option value='2' name='posicion'>Segunda posición</option>";   
+              echo"<option value='1' name='posicion'>Primera posición</option>";
+              echo"<option value='3' name='posicion'>Tercera posición</option>";
+              echo"<option value='4' name='posicion'>Cuarta posición</option>";
+              echo"<option value='5' name='posicion'>Quinta posición</option>";
+            }
+            if($posicion == 3){
+              echo"<option value='3' name='posicion'>Tercera posición</option>";
+              echo"<option value='1' name='posicion'>Primera posición</option>";
+              echo"<option value='2' name='posicion'>Segunda posición</option>";
+              echo"<option value='4' name='posicion'>Cuarta posición</option>";
+              echo"<option value='5' name='posicion'>Quinta posición</option>";
+            }
+            if($posicion == 4){
+              echo"<option value='4' name='posicion'>Cuarta posición</option>";
+              echo"<option value='1' name='posicion'>Primera posición</option>";
+              echo"<option value='2' name='posicion'>Segunda posición</option>";
+              echo"<option value='3' name='posicion'>Tercera posición</option>";
+              echo"<option value='5' name='posicion'>Quinta posición</option>";
+            }
+            if($posicion == 5){
+              echo"<option value='5' name='posicion'>Quinta posición</option>";
+              echo"<option value='1' name='posicion'>Primera posición</option>";
+              echo"<option value='2' name='posicion'>Segunda posición</option>";
+              echo"<option value='3' name='posicion'>Tercera posición</option>";
+              echo"<option value='4' name='posicion'>Cuarta posición</option>";
+            }?>
           </select>
-
-          <div class="invalid-feedback">
-            favor de escojer la posición
-          </div>
         </div> 
 
         <!--Drop Down Year-->
         <div class="col-md-2">
           <label for="year">Año*</label>
-          <select class="custom-select custom-select-lg mb-3" name="year" required>
-              <option value="2019" name="year">2019</option>
-              <option value="2020" name="year">2020</option>
-              <option value="2021" name="year">2021</option>
-              <option value="2022" name="year">2022 </option>
-              <option value="2023" name="year">2023 </option>
-              <option value="2024" name="year">2024</option>
-              <option value="2025" name="year">2025</option>
-              <option value="2026" name="year">2026</option>
-              <option value="2027" name="year">2027</option>
-              <option value="2028" name="year">2028</option>
+          <select class="custom-select custom-select-lg mb-3" name="year" required><?php
+              if($year == $year_19){
+                echo"<option value='2019' name='year'>2019</option>";
+                echo"<option value='2020' name='year'>2020</option>";
+                echo"<option value='2021' name='year'>2021</option>";
+                echo"<option value='2022' name='year'>2022</option>";
+                echo"<option value='2023' name='year'>2023</option>";
+                echo"<option value='2024' name='year'>2024</option>";
+                echo"<option value='2025' name='year'>2025</option>";
+                echo"<option value='2026' name='year'>2026</option>";
+                echo"<option value='2027' name='year'>2027</option>";
+                echo"<option value='2028' name='year'>2028</option>";
+              }  
+              else if($year == $year_20){
+                echo"<option value='2020' name='year'>2020</option>";
+                echo"<option value='2019' name='year'>2019</option>";
+                echo"<option value='2021' name='year'>2021</option>";
+                echo"<option value='2022' name='year'>2022</option>";
+                echo"<option value='2023' name='year'>2023</option>";
+                echo"<option value='2024' name='year'>2024</option>";
+                echo"<option value='2025' name='year'>2025</option>";
+                echo"<option value='2026' name='year'>2026</option>";
+                echo"<option value='2027' name='year'>2027</option>";
+                echo"<option value='2028' name='year'>2028</option>";
+              }
+              else if($year == $year_21){
+                echo"<option value='2021' name='year'>2021</option>";
+                echo"<option value='2020' name='year'>2020</option>";
+                echo"<option value='2019' name='year'>2019</option>";
+                echo"<option value='2022' name='year'>2022</option>";
+                echo"<option value='2023' name='year'>2023</option>";
+                echo"<option value='2024' name='year'>2024</option>";
+                echo"<option value='2025' name='year'>2025</option>";
+                echo"<option value='2026' name='year'>2026</option>";
+                echo"<option value='2027' name='year'>2027</option>";
+                echo"<option value='2028' name='year'>2028</option>";
+              }
+              else if($year == $year_22){                
+                echo"<option value='2022' name='year'>2022</option>";
+                echo"<option value='2020' name='year'>2020</option>";
+                echo"<option value='2019' name='year'>2019</option>";
+                echo"<option value='2021' name='year'>2021</option>";
+                echo"<option value='2023' name='year'>2023</option>";
+                echo"<option value='2024' name='year'>2024</option>";
+                echo"<option value='2025' name='year'>2025</option>";
+                echo"<option value='2026' name='year'>2026</option>";
+                echo"<option value='2027' name='year'>2027</option>";
+                echo"<option value='2028' name='year'>2028</option>";
+              }
+              else if($year == $year_23){                
+                echo"<option value='2023' name='year'>2023</option>";
+                echo"<option value='2020' name='year'>2020</option>";
+                echo"<option value='2019' name='year'>2019</option>";
+                echo"<option value='2021' name='year'>2021</option>";
+                echo"<option value='2022' name='year'>2022</option>";
+                echo"<option value='2024' name='year'>2024</option>";
+                echo"<option value='2025' name='year'>2025</option>";
+                echo"<option value='2026' name='year'>2026</option>";
+                echo"<option value='2027' name='year'>2027</option>";
+                echo"<option value='2028' name='year'>2028</option>";
+              }
+              if($year == $year_24){                
+                echo"<option value='2024' name='year'>2024</option>";
+                echo"<option value='2020' name='year'>2020</option>";
+                echo"<option value='2019' name='year'>2019</option>";
+                echo"<option value='2021' name='year'>2021</option>";
+                echo"<option value='2022' name='year'>2022</option>";
+                echo"<option value='2023' name='year'>2023</option>";
+                echo"<option value='2025' name='year'>2025</option>";
+                echo"<option value='2026' name='year'>2026</option>";
+                echo"<option value='2027' name='year'>2027</option>";
+                echo"<option value='2028' name='year'>2028</option>";
+              }
+              else if($year == $year_25){                
+                echo"<option value='2025' name='year'>2025</option>";
+                echo"<option value='2020' name='year'>2020</option>";
+                echo"<option value='2019' name='year'>2019</option>";
+                echo"<option value='2021' name='year'>2021</option>";
+                echo"<option value='2022' name='year'>2022</option>";
+                echo"<option value='2023' name='year'>2023</option>";
+                echo"<option value='2024' name='year'>2024</option>";
+                echo"<option value='2026' name='year'>2026</option>";
+                echo"<option value='2027' name='year'>2027</option>";
+                echo"<option value='2028' name='year'>2028</option>";
+              }
+              else if($year == $year_26){                
+                echo"<option value='2026' name='year'>2026</option>";
+                echo"<option value='2020' name='year'>2020</option>";
+                echo"<option value='2019' name='year'>2019</option>";
+                echo"<option value='2021' name='year'>2021</option>";
+                echo"<option value='2022' name='year'>2022</option>";
+                echo"<option value='2023' name='year'>2023</option>";
+                echo"<option value='2024' name='year'>2024</option>";
+                echo"<option value='2025' name='year'>2025</option>";
+                echo"<option value='2027' name='year'>2027</option>";
+                echo"<option value='2028' name='year'>2028</option>";
+              }
+              else if($year == $year_27){
+                echo"<option value='2027' name='year'>2027</option>";
+                echo"<option value='2020' name='year'>2020</option>";
+                echo"<option value='2019' name='year'>2019</option>";
+                echo"<option value='2021' name='year'>2021</option>";
+                echo"<option value='2022' name='year'>2022</option>";
+                echo"<option value='2023' name='year'>2023</option>";
+                echo"<option value='2024' name='year'>2024</option>";
+                echo"<option value='2025' name='year'>2025</option>";
+                echo"<option value='2026' name='year'>2026</option>";
+                echo"<option value='2028' name='year'>2028</option>";
+              }
+              else if($year == $year_28){
+                echo"<option value='2028' name='year'>2028</option>";
+                echo"<option value='2019' name='year'>2019</option>";
+                echo"<option value='2020' name='year'>2020</option>";
+                echo"<option value='2021' name='year'>2021</option>";
+                echo"<option value='2022' name='year'>2022</option>";
+                echo"<option value='2023' name='year'>2023</option>";
+                echo"<option value='2024' name='year'>2024</option>";
+                echo"<option value='2025' name='year'>2025</option>";
+                echo"<option value='2026' name='year'>2026</option>";
+                echo"<option value='2027' name='year'>2027</option>";
+                
+              }?>
           </select>
 
           <div class="invalid-feedback">

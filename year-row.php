@@ -5,71 +5,90 @@
 
     <?php 
 
-    $sql = "SELECT * FROM candidatos" ; 
     $con = conectarBD();
+    $query_1 = "SELECT * FROM candidatos ORDER BY id" ; 
+    $query_2 = "SELECT * FROM departamento ORDER BY num_estudiante";
+    $result_cand = mysqli_query($con, $query_1);
+    $result_dep = mysqli_query($con, $query_2);
 
-    // crear el prepare statement
-    if ($stmt = mysqli_prepare($con, $sql) ) {
+    echo "<table cellspacing='10' class='table table-hover'>";
 
-        // ejecutar el query
-        mysqli_stmt_execute($stmt);
-        
-        
-        $result = mysqli_stmt_get_result($stmt);
-        
-        // obtener los resultados
-        echo "<table cellspacing='10' class='table table-hover'>";?>
-            <thead>
-                <tr>
-                    <th>Foto</th>
-                    <th>Nº&nbsp;Estudiante</th>
-                    <th>Nombre </th>
-                    <th>Inicial</th>
-                    <th>Apellidos</th>
-                    <th>Departamento</th>
-                    <th>Puesto</th>
-                    <th>Posición</th>
-                    <th>Año</th>
-                    <th>Habilitar</th>
-                </tr>
-            </thead> <?php 
+    if(mysqli_num_rows($result_cand) && mysqli_num_rows($result_dep) > 0){
 
-            echo"<tbody>";
-                    
-                while ( $row = mysqli_fetch_assoc($result) ){
+        $output.= '
+        <div class="table-responsive">
+        <table class="table table bordered">
+        <tr>
+            <th>Nº</th>
+            <th>Foto</th>
+            <th>Nº&nbsp;Estudiante</th>
+            <th>Nombre </th>
+            <th>Inicial</th>
+            <th>Apellidos</th>
+            <th>Departamento</th>
+            <th>Puesto</th>
+            <th>Posición</th>
+            <th>Año</th>
+            <th>Activar</th>
+        </tr>';
 
-                    if( $row['stat'] == false ){
+        echo $output;
 
-                        echo "<tr>\n";
-                            echo"<td>";?> <img src="<?php echo 'img/'.$row['path']; ?>" height="100px" width="100px"> <?php echo"</td>";
-                            echo "<td>". $row['id'] . "</td>\n";
-                            echo "<td>". $row['nombre'] . "</td>\n";
-                        
-                            //Si no tiene inicial imprime ""
-                            if ($row['inicial'] == null){
-                                echo "<td>" ."". "</td>\n";
-                            }  else{//imprime inicial
-                                echo "<td>" .$row['inicial'] . "</td>\n";
+        while($row_cand = mysqli_fetch_array($result_cand)){
+
+            $row_dep = mysqli_fetch_array($result_dep);
+            
+            if($row_cand['stat'] != 1){
+                $x;
+                $x++;
+                echo"<tr>";
+                    //Contador
+                    echo"<td>".$x."</td>\n";
+
+                    $directorio = opendir('img_candidatos');
+
+                    //Verifica si hay fotos y las muestra
+                    if($directorio){
+                        while($images = readdir($directorio)){
+                            if($images == $row_cand['path']){
+                                echo"<td><img src='img_candidatos/$images' height='100px' width='100px'></td>";
                             }
-                            echo "<td>" . $row['apellidos'] . "</td>\n";
-                            echo "<td>" . $row['departamento'] . "</td>\n";
-                            echo "<td>" . $row['puesto'] . "</td>\n";
-                            echo "<td>" . $row['posicion'] . "</td>\n";
-                            echo "<td>".$row['year']."</td>\n";
-                            echo"<td><a class='enable' nombre = ".$row['nombre']."  apellidos =".$row['apellidos']."
-                            href='include/habilitar_candidato.php?id=".$row['id']."'>Activar</a></td>\n";
-                        echo "</tr>\n";
+                        }
+                        
+                        //Si no tiene foto muestra un icono
+                    }if($row_cand['path'] != true){
+                        echo"<td>";?> <img src="imagenes/candidato_icon.gif" 
+                        height="100px" width="100px"> <?php echo"</td>\n";
                     }
-                }
-            echo "</tbody>\n";
-        echo "</table>\n";
+                    echo"<td>".$num_estudiante = $row_cand['id']."</td>\n";
+                    echo"<td>".$row_cand["nombre"]."</td>\n";
+                    echo"<td>".$row_cand["inicial"]."</td>\n";
+                    echo"<td>".$row_cand["apellidos"]."</td>\n";
+
+                    if($row_cand['id'] == $row_dep['num_estudiante']){    
+                        echo "<td>".$row_dep['departamentos']."</td>\n";
+                    }else{
+                        echo"<td>No</td>";
+                    }
+
+                    echo"<td>".$row_cand["puesto"]."</td>\n";
+                    echo"<td>".$row_cand["posicion"]."</td>\n";
+                    echo"<td>".$row_cand["year"]."</td>\n";
+
+                    
+                    echo"<td><a class='enable' nombre = ".$row_cand['nombre']."  apellidos =".$row_cand['apellidos']."
+                    href='include/habilitar_candidato.php?id=".$row_cand['id']."'>Activar</a></td>\n";
+                echo"</tr>";
+            }
+        }  
+    }          
+                         
+         
 
         // liberar memoria
         mysqli_stmt_close($stmt);
         
-    } else {
-        echo "ERROR: " . mysqli_errno($con) . ' - ' . mysqli_error($con);
-    } ?>
+     ?>
 
     <script type="text/javascript">
 

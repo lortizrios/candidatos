@@ -397,8 +397,8 @@
               }
               else if($year == $year_21){
                 echo"<option value='2021' name='year'>2021</option>";
-                echo"<option value='2020' name='year'>2020</option>";
                 echo"<option value='2019' name='year'>2019</option>";
+                echo"<option value='2020' name='year'>2020</option>";
                 echo"<option value='2022' name='year'>2022</option>";
                 echo"<option value='2023' name='year'>2023</option>";
                 echo"<option value='2024' name='year'>2024</option>";
@@ -409,8 +409,8 @@
               }
               else if($year == $year_22){                
                 echo"<option value='2022' name='year'>2022</option>";
-                echo"<option value='2020' name='year'>2020</option>";
                 echo"<option value='2019' name='year'>2019</option>";
+                echo"<option value='2020' name='year'>2020</option>";
                 echo"<option value='2021' name='year'>2021</option>";
                 echo"<option value='2023' name='year'>2023</option>";
                 echo"<option value='2024' name='year'>2024</option>";
@@ -421,8 +421,8 @@
               }
               else if($year == $year_23){                
                 echo"<option value='2023' name='year'>2023</option>";
-                echo"<option value='2020' name='year'>2020</option>";
                 echo"<option value='2019' name='year'>2019</option>";
+                echo"<option value='2020' name='year'>2020</option>";
                 echo"<option value='2021' name='year'>2021</option>";
                 echo"<option value='2022' name='year'>2022</option>";
                 echo"<option value='2024' name='year'>2024</option>";
@@ -433,8 +433,8 @@
               }
               if($year == $year_24){                
                 echo"<option value='2024' name='year'>2024</option>";
-                echo"<option value='2020' name='year'>2020</option>";
                 echo"<option value='2019' name='year'>2019</option>";
+                echo"<option value='2020' name='year'>2020</option>";
                 echo"<option value='2021' name='year'>2021</option>";
                 echo"<option value='2022' name='year'>2022</option>";
                 echo"<option value='2023' name='year'>2023</option>";
@@ -445,8 +445,8 @@
               }
               else if($year == $year_25){                
                 echo"<option value='2025' name='year'>2025</option>";
-                echo"<option value='2020' name='year'>2020</option>";
                 echo"<option value='2019' name='year'>2019</option>";
+                echo"<option value='2020' name='year'>2020</option>";
                 echo"<option value='2021' name='year'>2021</option>";
                 echo"<option value='2022' name='year'>2022</option>";
                 echo"<option value='2023' name='year'>2023</option>";
@@ -457,8 +457,8 @@
               }
               else if($year == $year_26){                
                 echo"<option value='2026' name='year'>2026</option>";
-                echo"<option value='2020' name='year'>2020</option>";
                 echo"<option value='2019' name='year'>2019</option>";
+                echo"<option value='2020' name='year'>2020</option>";
                 echo"<option value='2021' name='year'>2021</option>";
                 echo"<option value='2022' name='year'>2022</option>";
                 echo"<option value='2023' name='year'>2023</option>";

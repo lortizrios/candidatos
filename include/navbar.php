@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
-<!--jQuery is required. -->
+<!--jQuery is required-->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script>
 
@@ -23,8 +23,40 @@
         <a class="nav-link" href="ex-candidatos-registrados.php">Ex-candidatos</a>
       </li>
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" name="search_text" id="search_text" placeholder="Search">
+    <form class="form-inline my-2 my-lg-0"  >
+      <input class="form-control mr-sm-2" type="text" name="search_text" id="search_text" placeholder="Buscar">
     </form>
   </div>
 </nav>
+
+<script>
+  $(document).ready(function(){
+
+  load_data();
+
+    function load_data(query){
+      $.ajax({
+        url:"fetch.php",
+        method:"POST",
+        data:{query:query},
+        success:function(data){    
+          $('#result').html(data);
+        }
+      });
+    }
+    $('#search_text').keyup(function(){
+      var search = $(this).val();
+      if(search != ''){
+        load_data(search);
+      }else{
+        load_data();
+      }
+    });
+  });
+</script>
+
+
+
+
+
+

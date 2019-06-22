@@ -5,7 +5,7 @@
     $urlEdi = './editar.php';
     $urlInd = './index.php';
 
-    $idDup = "Error: Numero de estudiante duplicado. Intente nuevamente.";
+    $idDup = "Error: Numero de estudiante duplicado. Ingrese otro numero de estudiante.";
   
     if(isset($_POST['registrar'])){
 
@@ -18,12 +18,13 @@
         $posicion = $_POST['posicion'];
         $year = $_POST['year'];
 
-        //Primero verifica si el #estudiante es unico
-        $sql = "SELECT * FROM candidatos WHERE id = '$num_estudiante'"; 
+        //Primero verifica si el #estudiante no existe
+        $sql_validar = "SELECT * FROM candidatos WHERE id = '$num_estudiante'";
+         
         $con = conectarBD();
 
         //Crear el prepare statement
-        if ($stmt = mysqli_prepare($con, $sql)) {
+        if ($stmt = mysqli_prepare($con, $sql_validar)) {
 
             // ejecutar el query
             mysqli_stmt_execute($stmt);
@@ -60,17 +61,14 @@
                             //Conecta a la base datos
                             $con = conectarBD();
 
-                            //Primer insert en tabla candidatos
-                            $queryFile_1 = $con -> query("INSERT INTO candidatos (id, nombre, inicial, apellidos,  puesto, posicion, year, path) 
-                            VALUES('$num_estudiante', '$nombre', '$inicial', '$apellidos', '$puesto', '$posicion', '$year', '$archivoName')");
-
-                            //Segundo insert en tabla
-                            $queryFile_2 = $con -> query("INSERT INTO departamento (id, num_estudiante, departamentos) VALUES (NULL, '$num_estudiante', '$departamento')");
+                            //Inserta datos
+                            $query = $con -> query("INSERT INTO candidatos (id, nombre, inicial, apellidos, departamento, puesto, posicion, year, path) 
+                            VALUES('$num_estudiante', '$nombre', '$inicial', '$apellidos', '$departamento', '$puesto', '$posicion', '$year', '$archivoName')");
 
                             //valida si ejecuta query
-                            if($queryFile_1 && $queryFile_2){
+                            if($query){
                                 ?><script>
-                                    alert("¡Candidato registrado con éxito!");
+                                    alert('¡Candidato registrado con éxito!');
                                 </script><?php
                                 header("Location: $urlCan");
 
@@ -80,8 +78,11 @@
                                 header("Refresh:5; url: $urlInd");
                             }
 
-                        }else{
-                            echo"No guardo la foto en el folder";
+                        }else{?>
+                            <script>
+                                alert('Error al guardar la foto intente de nuevo.');
+                                window.history.back(-1);
+                            </script><?php
                         }
                         //Termina proceso de subir archivos----------------------------
                         
@@ -89,35 +90,33 @@
                         //formato incorrecto
                     }else{?>
                         <script>
-                            alert("Elija una imagen con el formato correcto. (JPG o JPEG)");
+                            alert('Elija una imagen con el formato correcto. (JPG o JPEG)');
                             history.back(-1);
                         </script><?php
                     }
 
                     
-                }else{//Si no existe foto No guarda el path
+                }else{//Query no guarda
 
                     $con = conectarBD();
                     
                     //query que no guarda el path
-                    $queryNull_1 = $con -> query("INSERT INTO candidatos (id, nombre, inicial, apellidos, puesto, posicion, year) 
-                    VALUES('$num_estudiante', '$nombre', '$inicial', '$apellidos', '$puesto', '$posicion', '$year')");
+                    $queryNull = $con -> query("INSERT INTO candidatos (id, nombre, inicial, apellidos, departamento, puesto, posicion, year) 
+                    VALUES('$num_estudiante', '$nombre', '$inicial', '$apellidos', '$departamento','$puesto', '$posicion', '$year')");
                     
-                    //Segundo insert en tabla
-                    $queryNull_2 = $con -> query("INSERT INTO departamento (id, num_estudiante, departamentos) VALUES (NULL, '$num_estudiante', '$departamento')");
-                    var_dump($queryNull_2);
+                    var_dump($queryNull);
 
                     //valida si query ejecuto
-                    if($queryNull_1 && $queryNull_2){ 
+                    if($queryNull){ 
                         ?><script>
-                            alert("¡Candidato registrado con éxito!");
+                            alert('¡Candidato registrado con éxito!');
                         </script><?php
                         header("Location: $urlCan");
 
                      //no ejecuta el query imprime error
                     }else{
                         echo "Error: " . mysqli_errno($con) . ' - ' . mysqli_error($con)."\n";
-                        header("Refresh: 5; url= $urlInd");
+                        header("Refresh: 4; url= $urlInd");
                         
                     }
                 }
@@ -138,7 +137,7 @@
         mysqli_close($con);
         
         //Cierra statement
-        mysqli_stmt_close($exe);    
+        mysqli_stmt_close($query, $queryNull,$sql_validar);    
     }
 
     if(isset($_POST['update'])){
@@ -163,16 +162,12 @@
 
         //var_dump($id_post);
         
-        $select_all = "SELECT * FROM departamento";
+        $query_foto = "UPDATE candidatos SET id = '$num_estudiante', nombre = '$nombre', inicial = '$inicial', apellidos = '$apellidos', 
+        departamento = '$departamento', puesto = '$puesto', posicion = '$posicion', year = '$year', path = '$archivoName' WHERE id = '$id_post'";
 
-        $query_foto = "UPDATE candidatos SET nombre = '$nombre', inicial = '$inicial', apellidos = '$apellidos', 
-        puesto = '$puesto', posicion = '$posicion', year = '$year', path = '$archivoName' WHERE id = '$id_post'";
 
-        $query_departamento = "UPDATE departamento SET departamentos = '$departamento' 
-        WHERE num_estudiante = '$num_estudiante'";
-
-        $query_foto_vacia = "UPDATE candidatos SET nombre = '$nombre', inicial = '$inicial', 
-        apellidos = '$apellidos', puesto = '$puesto', posicion = '$posicion', year = '$year' 
+        $query_foto_vacia = "UPDATE candidatos SET id = '$num_estudiante', nombre = '$nombre', inicial = '$inicial', 
+        apellidos = '$apellidos', departamento = '$departamento', puesto = '$puesto', posicion = '$posicion', year = '$year' 
         WHERE id = '$id_post'";
 
         $con = conectarBD();
@@ -192,10 +187,6 @@
                     mkdir('../img_candidatos', 0777);
                 }
 
-                if(file_exists($archivo['tmp_name'],'../img_candidatos/'.$archivoName)){
-                    echo"archivo existe";
-                    die();
-                }
                 //mueve la imagen del archivo temporal al archivo final
                 if($move = move_uploaded_file($archivo['tmp_name'],'../img_candidatos/'.$archivoName)){
                     //echo"Guardo la foto en el folder";
@@ -207,17 +198,17 @@
                     $con;
                     
                     //Selecciona todos de la tabla departamento
-                    if($select = mysqli_query($con,$select_all)){ 
+                    //if($select = mysqli_query($con,$select_all)){ 
                         //echo"entro a select all"; 
 
                         //imprime todos los que esten en departamento
-                        while($row_dep = mysqli_fetch_array($select)){
+                        //while($row_dep = mysqli_fetch_array($select)){
                             //var_dump($row_dep);
-                            $row_id = $row_dep['id'];
-                            $num = $row_dep['num_estudiante'];
+                            //$row_id = $row_dep['id'];
+                            //$num = $row_dep['num_estudiante'];
 
                             //valida que num estudiante candidato y num estudiante departamento sean iguales 
-                            if($num == $id_post){
+                            //if($num == $id_post){
                                 //echo"------------------------------------------------------";
                                 //echo"Son iguales";
                                 //var_dump($row_id);
@@ -231,11 +222,11 @@
                                     //var_dump($qf);
                                     //echo "entro al query_foto";
                                     
-                                    $query_departamento;
+                                    //$query_departamento;
 
                                     //var_dump($id_post);
                                     
-                                    if($qd = mysqli_query($con,$query_departamento)){
+                                    //if($qd = mysqli_query($con,$query_departamento)){
                                         //echo "Se cumplio update_departamento";?>
 
                                         <script>
@@ -243,21 +234,21 @@
                                         </script><?php
 
                                         header("Refresh: 1; url= $urlCan");
-                                    }
+                                    //}
                                     
                                 }else{
                                     //imprime el error de la conexion
                                     echo "Error: " . mysqli_errno($con) . ' - ' . mysqli_error($con); 
                                     header("Refresh:4; URL= $urlUpd");
                                 }
-                            }
-                        }
+                            //}
+                        //}
 
-                    }else{
+                    /*}else{
                         echo "Error: " . mysqli_errno($con) . ' - ' . mysqli_error($con);
                         header("Refresh:4; URL= $urlUpd");
 
-                    }
+                    }*/
 
                 }else{?>
                     <script>
@@ -279,17 +270,17 @@
             $con;
                     
             //Selecciona todos de la tabla departamento
-            if($select = mysqli_query($con,$select_all)){ 
-                echo"entro a select all"; 
+            //if($select = mysqli_query($con,$select_all)){ 
+                //echo"entro a select all"; 
 
                 //imprime todos los que esten en departamento
-                while($row_dep = mysqli_fetch_array($select)){
-                    var_dump($row_dep);
-                    $row_id = $row_dep['id'];
-                    $num = $row_dep['num_estudiante'];
+                //while($row_dep = mysqli_fetch_array($select)){
+                    //var_dump($row_dep);
+                    //$row_id = $row_dep['id'];
+                    //$num = $row_dep['num_estudiante'];
 
                     //valida que num estudiante candidato y num estudiante departamento sean iguales 
-                    if($num == $id_post){
+                    //if($num == $id_post){
 
                         $query_foto_vacia;
                         
@@ -298,47 +289,44 @@
                             var_dump($qfv);
                             echo "entro al query_foto_vacia";
                             
-                            $query_departamento;
+                            $query_foto_vacia;
 
                             //var_dump($id_post);
+                            ?>
                             
-                            if($qd = mysqli_query($con,$query_departamento)){
-                                echo "Se cumplio update_departamento";?>
+                                
+                            <script>
+                                alert('Candidato actualizado con exito.');
+                            </script>
+                            <?php
 
-                                <script>
-                                    alert("Candidato actualizado con exito.");
-                                </script><?php
-
-                                header("Refresh: 1; url= $urlCan");
-                            }
+                            header("Refresh: 0; url= $urlCan");
+                            
                             
                         }else{
                             //imprime el error de la conexion
                             echo "Error: " . mysqli_errno($con) . ' - ' . mysqli_error($con); 
                             header("Refresh:4; URL= $urlUpd");
                         }
-                    }
-                }
-            }
+                    //}
+                //}
+            //}
 
         }
         
         //Cierra statement
-        mysqli_stmt_close($select_all,$query_foto,$query_foto_vacia,$query_departamento);
+        mysqli_stmt_close($query_foto,$query_foto_vacia);
 
         // ce rrar la conexion
         mysqli_close($con);
     }
 
-    //Imprime los valores para utilizarlos en editar.php
+    //Obtiene id de boton editar e imprime los valores para utilizarlos en editar.php
     if(isset($_GET['id'])){
 
         $id = $_GET['id'];
 
-        $sql = "SELECT candidatos.id, candidatos.nombre, candidatos.inicial, candidatos.apellidos, 
-        candidatos.puesto, candidatos.posicion, candidatos.stat, candidatos.path, candidatos.year, 
-        departamento.departamentos FROM candidatos, departamento 
-        WHERE candidatos.id=departamento.num_estudiante AND candidatos.id = '$id'";
+        $sql = "SELECT * FROM candidatos WHERE id = '$id'";
 
         $con = conectarBD();
 
@@ -358,7 +346,7 @@
             $puesto = $row['puesto'];
             $posicion = $row['posicion'];
             $year = $row['year'];
-            $departamento = $row['departamentos'];
+            $departamento = $row['departamento'];
 
             var_dump($row['id']);
             var_dump($row['nombre']);
@@ -372,7 +360,8 @@
             echo"year";
             var_dump($row['year']);
             var_dump($row['path']);
-            var_dump($row['departamentos']);
+            echo"Departamento";
+            var_dump($row['departamento']);
 
         }else{
             echo"Error sql3";echo "Error: " . mysqli_errno($con) . ' - ' . mysqli_error($con);

@@ -3,32 +3,24 @@
 
     $connect = conectarBD();
 
-    //cacha si se escribe en el search y ejecuta
+    //Adicional dinamic search
+    $output = '';
     if(isset($_POST["query"])){
-
-        $upcase = ucwords(strtolower($_POST["query"]));
-
-        $search = mysqli_real_escape_string($connect, $upcase);
-
-        $query = 
-        "SELECT * FROM candidatos 
-        WHERE nombre LIKE '".$search."%' 
-        OR inicial LIKE '".$search."%' 
-        OR apellidos LIKE '".$search."%'";
-
+        $search = ucwords(strtolower($_POST["query"]));
+        $query = "
+        SELECT * FROM candidatos 
+        WHERE CONCAT(nombre, ' ', apellidos) LIKE '%".$search."%'";
     }else{
-        
-        $query_1 = "SELECT * FROM candidatos ORDER BY id";
-        
+        $query = "SELECT * FROM candidatos ORDER BY nombre";
     }
+    //------------------------
+    //$query = "SELECT * FROM candidatos ORDER BY id";
 
-    $result_cand = mysqli_query($connect, $query_1);
-    $query_2 = "SELECT * FROM departamento ORDER BY num_estudiante";
-    $result_dep = mysqli_query($connect, $query_2);
-
+    $result = mysqli_query($connect, $query);
+    
     echo "<table cellspacing='10' class='table table-hover'>";
 
-    if(mysqli_num_rows($result_cand) && mysqli_num_rows($result_dep) > 0){
+    if(mysqli_num_rows($result) > 0){
 
         $output.= '
         <div class="table-responsive">
@@ -49,11 +41,9 @@
 
         echo $output;
 
-        while($row_cand = mysqli_fetch_array($result_cand)){
-
-            $row_dep = mysqli_fetch_array($result_dep);
+        while($row = mysqli_fetch_array($result)){
             
-            if($row_cand['stat'] !=0){
+            if($row['stat'] !=0){
                 $x;
                 $x++;
                 echo"<tr>";
@@ -65,35 +55,33 @@
                     //Verifica si hay fotos y las muestra
                     if($directorio){
                         while($images = readdir($directorio)){
-                            if($images == $row_cand['path']){
+                            if($images == $row['path']){
                                 echo"<td><img src='img_candidatos/$images' height='100px' width='100px'></td>";
                             }
                         }
                         
                         //Si no tiene foto muestra un icono
-                    }if($row_cand['path'] != true){
+                    }if($row['path'] != true){
                         echo"<td>";?> <img src="imagenes/candidato_icon.gif" 
                         height="100px" width="100px"> <?php echo"</td>\n";
                     }
-                    echo"<td>".$num_estudiante = $row_cand['id']."</td>\n";
-                    echo"<td>".$row_cand["nombre"]."</td>\n";
-                    echo"<td>".$row_cand["inicial"]."</td>\n";
-                    echo"<td>".$row_cand["apellidos"]."</td>\n";
-
-                    if($row_cand['id'] == $row_dep['num_estudiante']){    
-                        echo "<td>".$row_dep['departamentos']."</td>\n";
+                    echo"<td>".$num_estudiante = $row['id']."</td>\n";
+                    echo"<td>".$row["nombre"]."</td>\n";
+                    if($row['inicial'] != null){
+                        echo"<td>".$row["inicial"]."."."</td>\n";
                     }else{
-                        echo"<td>No</td>";
+                        echo"<td>".$row["inicial"]."</td>\n";
                     }
-
-                    echo"<td>".$row_cand["puesto"]."</td>\n";
-                    echo"<td>".$row_cand["posicion"]."</td>\n";
+                    echo"<td>".$row["apellidos"]."</td>\n";
+                    echo"<td>".$row['departamento']."</td>\n";
+                    echo"<td>".$row["puesto"]."</td>\n";
+                    echo"<td>".$row["posicion"]."</td>\n";
                     //Editar
-                    echo "<td><a href='editar.php?id=".$row_cand['id']."'>Editar</a></td>\n";
+                    echo "<td><a href='editar.php?id=".$row['id']."'>Editar</a></td>\n";
 
                     //Borrar
-                    echo "<td><a class='delete' href='include/delete.php?id=".$row_cand['id']."' name=".$row_cand['nombre']." 
-                    apellido=". $row_cand['apellidos']." >Eliminar</button></td\n>";
+                    echo "<td><a class='delete' href='include/delete.php?id=".$row['id']."' name=".$row['nombre']." 
+                    apellido=". $row['apellidos']." >Eliminar</button></td\n>";
 
                 echo"</tr>";
             }

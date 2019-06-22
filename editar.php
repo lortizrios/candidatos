@@ -508,7 +508,7 @@
       </div>  
                   
       <button type="submit" class="btn btn-primary custom-select-lg"
-        name="update" style="margin-bottom: 90px" value="Submit">Editar</button> 
+      name="update" style="margin-bottom: 90px" value="Submit">Guardar</button> 
 
     </form>
                 

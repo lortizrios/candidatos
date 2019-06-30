@@ -1,7 +1,8 @@
 <?php 
     require_once('include/conexion-bd.php');?>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script type="text/javascript" src="javascript/funtions.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 
     <?php 
 
@@ -70,40 +71,45 @@
                     echo"<td>".$row["posicion"]."</td>\n";
                     echo"<td>".$row["year"]."</td>\n";
 
-                    
-                    echo"<td><a class='enable' nombre = ".$row['nombre']."  apellidos =".$row['apellidos']."
-                    href='include/habilitar_candidato.php?id=".$row['id']."'>Activar</a></td>\n";
+                    echo"<td><a class='enable' href='#' onclick='return false' id = ".$row['id']." nombre = ".$row['nombre']."  
+                    inicial=".$row["inicial"]." apellido = ".$row['apellidos'].">Activar</button></td>\n";
                 echo"</tr>";
             }
         } 
     }
-        
-                         
-         
-
+     
     // liberar memoria
     mysqli_stmt_close($result);?>
 
-    <script type="text/javascript">
+<script type="text/javascript">
 
-        $('.enable').click(function(e){
-
-            var nombre = $(this).attr("nombre");
-            var inicial = $(this).attr("inicial");
-            var last = $(this).attr("apellidos");
-        
-            del = confirm("¿Desea habilitar a "+nombre+" "+last+"?");
-
-            if(!del){
-                e.preventDefault();
-            }
-
-        });
-
-    </script>
-
-<?php
-
-// cerrar la conexion
-mysqli_close($con);
-?>
+$('.enable').click(function(){
+    var id = $(this).attr("id");
+    var nombre = $(this).attr("nombre");
+    var apellido = $(this).attr("apellido");
+  
+    swal({
+        title: "Activar",
+        text: "¿Deseas reactivar a "+nombre+"?",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    }).then(function(reactivar) {
+        if(reactivar){
+            $.ajax({
+                url:'include/habilitar-candidato.php',
+                type:'get',
+                data:{idd:id},
+            })                      
+            swal({
+                title: "Activado",
+                text: "¡"+nombre+" ha sido reactivado!",
+                icon: "success",
+                buttons: false,
+                timer: 3000,
+            });          
+            location.reload(true);
+        }
+    })
+})
+</script>

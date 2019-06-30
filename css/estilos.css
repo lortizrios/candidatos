@@ -1,9 +1,11 @@
 img{
-     margin-top: 5px
-     
+     margin-top: 5px  
 } 
 
 .centrar{
      position: absolute;
+}
 
+#btn-guardar{
+     margin-right: 100 px
 }

@@ -13,7 +13,9 @@
     <link rel="stylesheet" href="css/bootstrap.min.css" >
 
     <!--Validacion textbox-->
-    <script type="text/javascript" src="validation.js"></script>
+    <script type="text/javascript" src="javascript/validation.js"></script>
+
+    <script type="text/javascript" src="javascript/funtions.js"></script>
 
     <?php 
       include(__DIR__.'/include/navbar.php'); 
@@ -505,13 +507,17 @@
           <input value="file" class="form-control-file" id="archivo"
           type="file"  name="archivo">
         </div>
-      </div>  
-                  
-      <button type="submit" class="btn btn-primary custom-select-lg"
-      name="update" style="margin-bottom: 90px" value="Submit">Guardar</button> 
+      </div>
 
+      <div class="form-group">            
+        <button type="submit" class="btn btn-primary custom-select-lg" id="btn-guardar" style="width: 150px; margin-right: 10px;"
+        name="update" style="margin-bottom: 90px" value="Submit">Guardar</button> 
+        
+        <button type="button" class="btn btn-secondary custom-select-lg" style="width: 150px"
+        name="cancelar" style="margin-left: 15px; margin-bottom: 90px" onclick="goBack();" value="Back" >Cancelar</button>
+      </div> 
     </form>
-                
+     
     <!--Offline-->
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>

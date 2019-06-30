@@ -11,6 +11,9 @@
 
         <!--CSS-->
         <link rel="stylesheet" href="css/estilos.css">
+
+        <!--Libreria Sweet Alert-->
+        <script src="sweetalert/sweetalert.min.js"></script>
         
         <!--Barra de navegacion-->
         <?php include("include/navbar.php"); ?>
@@ -26,9 +29,16 @@
     <body class="container" >
         
         <div style="margin-top: 15px" class="container table-responsive">
-        <h5>Ex-candidatos inactivos</h5>
+            <h5>Ex-candidatos inactivos</h5>
             <?php
+                //Imprime la tabla creada en php
                 require_once('year-row.php');
+
+                //logica de alertas sweet alert
+                require_once('funciones_php/funciones.php');
+
+                //llama a las alertas creadas
+                alertas();
             ?>
         </div>
 

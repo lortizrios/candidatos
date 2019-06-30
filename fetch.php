@@ -1,3 +1,6 @@
+<script type="text/javascript" src="javascript/funtions.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
 <?php
     include_once('include/conexion-bd.php');
 
@@ -8,13 +11,14 @@
     if(isset($_POST["query"])){
         $search = ucwords(strtolower($_POST["query"]));
         $query = "
-        SELECT * FROM candidatos 
-        WHERE CONCAT(nombre, ' ', apellidos) LIKE '%".$search."%'";
+        SELECT * FROM candidatos
+        WHERE CONCAT(nombre, ' ', apellidos) LIKE '%".$search."%'
+        OR departamento LIKE '%".$search."%'
+        OR puesto LIKE '%".$search."%'ORDER BY nombre";
     }else{
         $query = "SELECT * FROM candidatos ORDER BY nombre";
     }
     //------------------------
-    //$query = "SELECT * FROM candidatos ORDER BY id";
 
     $result = mysqli_query($connect, $query);
     
@@ -80,8 +84,8 @@
                     echo "<td><a href='editar.php?id=".$row['id']."'>Editar</a></td>\n";
 
                     //Borrar
-                    echo "<td><a class='delete' href='include/delete.php?id=".$row['id']."' name=".$row['nombre']." 
-                    apellido=". $row['apellidos']." >Eliminar</button></td\n>";
+                    echo "<td><a class='delete' href='#' onclick='return false' id=".$row['id']." name=".$row['nombre']." 
+                    apellido=". $row['apellidos'].">Eliminar</button></td\n>";
 
                 echo"</tr>";
             }
@@ -93,16 +97,35 @@
 ?>
 <script type="text/javascript">
 
-$('.delete').click(function(e) {
-
+$('.delete').click(function(){
+    var id = $(this).attr("id");
     var nombre = $(this).attr("name");
     var appellido = $(this).attr("apellido");
-    
-    del = confirm("¿Desea eliminar a "+nombre+" "+appellido+"?");
-
-    if(!del){
-        e.preventDefault();
-    }
+  
+    swal({
+        title: "Eliminar",
+        text: "¿Deseas eliminar a "+nombre+" "+appellido+"?",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    }).then(function(confirm) {
+        if(confirm){
+            $.ajax({
+                url:'include/delete.php',
+                type:'get',
+                data:{idd:id},
+            }) 
+            swal({
+                title: "Eliminado",
+                text: "¡"+nombre+" "+appellido+" ha sido eliminado!",
+                icon: "success",
+                buttons: false,
+                timer: 3000,
+            });   
+            location.reload(true);
+        }
+        
+    })
+  
 })
-
 </script>

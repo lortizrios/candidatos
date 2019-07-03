@@ -37,7 +37,7 @@
 			<th>Activar</th>
 		</tr>';
 		echo $output;
-							
+					
 		//Imprime todos los candidatos
 		while($row = mysqli_fetch_array($result)){
 				
@@ -81,11 +81,8 @@
 				echo"</tr>";
 			}
 		} 
-		
-
-
 	}else{
-		echo 'Data Not Found';
+		echo "<h5 style='color: red;'>Candidato no encontrado.<h5> ";
 	}
 
 	// liberar memoria

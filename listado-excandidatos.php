@@ -86,7 +86,10 @@
 	}
 
 	// liberar memoria
-    mysqli_stmt_close($result);
+	mysqli_stmt_close($result);
+	
+	//Cierra conexion
+	mysqli_close($con);
 ?>
 
 <script type="text/javascript">

@@ -26,4 +26,7 @@
 
     // liberar memoria
     mysqli_stmt_close($stmt);
+
+    //Cierra conexion
+    mysqli_close($con);
 ?>

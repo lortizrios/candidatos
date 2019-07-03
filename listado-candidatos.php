@@ -94,7 +94,11 @@
         echo "<h5 style='color: red;'>Candidato no encontrado.<h5> ";
     }
 
+    //cierra statement
     mysqli_stmt_close($result);
+
+    //Cierra conexion
+    mysqli_close($con);
 
 ?>
 <script type="text/javascript">

@@ -24,39 +24,37 @@
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0"  >
-      <input class="form-control mr-sm-2" type="text" name="search_text" id="search_text" placeholder="Buscar">
+      <input class="form-control mr-sm-2" type="text" name="search" id="search_ex" placeholder="Buscar">
     </form>
   </div>
 </nav>
 
 <script>
-  $(document).ready(function(){
-
-  load_data();
-
-    function load_data(query){
-      $.ajax({
-        url:"listado-candidatos.php",
-        method:"POST",
-        data:{query:query},
-        success:function(data){    
-          $('#result').html(data);
-        }
-      });
-    }
-    $('#search_text').keyup(function(){
-      var search = $(this).val();
-      if(search != ''){
-        load_data(search);
-      }else{
+    $(document).ready(function(){
         load_data();
-      }
+        function load_data(query)
+        {
+            $.ajax({
+                url:"listado-excandidatos.php",
+                method:"post",
+                data:{query:query},
+                success:function(data)
+                {
+                    $('#excandidatos').html(data);
+                }
+            });
+        }
+        
+        $('#search_ex').keyup(function(){
+            var search = $(this).val();
+            if(search != '')
+            {
+                load_data(search);
+            }
+            else
+            {
+                load_data();			
+            }
+        });
     });
-  });
 </script>
-
-
-
-
-
-

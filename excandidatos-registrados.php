@@ -18,16 +18,10 @@
       <!--CSS-->
       <link rel="stylesheet" href="css/estilos.css">
       
-      <?php 
-        //navegation bar
-        include("include/navbar.php");
-
-        //logica de alertas sweet alert
-        require_once('funciones-php/funciones.php');
-
-        //llama a las alertas creadas
-        alertas();
-      ?>
+        <?php 
+            //navegation bar
+            include("include/navbar-excandidatos.php");
+        ?>
 
       <title>Candidatos</title>
 
@@ -39,12 +33,10 @@
 
     <body class="container">
       <div style="margin-top: 15px" class="container table-responsive">
-        <div id="resultados"></div>
-        <div id="result"></div>
+        <div id="excandidatos"></div>
         <br>
       </div>
       <script src="js/jquery.js"></script>
       <script src="js/bootstrap.min.js"></script>
     </body>
 </html>
-

@@ -1,7 +1,7 @@
-<script type="text/javascript" src="javascript/funtions.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 
 <?php
+
     include_once('include/conexion-bd.php');
 
     $connect = conectarBD();
@@ -94,38 +94,48 @@
         echo "<h5 style='color: red;'>Candidato no encontrado.<h5> ";
     }
 
+    mysqli_stmt_close($result);
+
 ?>
 <script type="text/javascript">
 
-$('.delete').click(function(){
-    var id = $(this).attr("id");
-    var nombre = $(this).attr("name");
-    var appellido = $(this).attr("apellido");
-  
-    swal({
-        title: "Eliminar",
-        text: "¿Deseas eliminar a "+nombre+" "+appellido+"?",
-        icon: "warning",
-        buttons: true,
-        dangerMode: true,
-    }).then(function(confirm) {
-        if(confirm){
-            $.ajax({
-                url:'include/delete.php',
-                type:'get',
-                data:{idd:id},
-            }) 
-            swal({
-                title: "Eliminado",
-                text: "¡"+nombre+" "+appellido+" ha sido eliminado!",
-                icon: "success",
-                buttons: false,
-                timer: 3000,
-            });   
-            location.reload(true);
-        }
-        
+    //Crea alerta cuando se hace click en borrar
+    $('.delete').click(function(){
+
+        //utiliza las variable row[''] de boton borrar
+        var id = $(this).attr("id");
+        var nombre = $(this).attr("name");
+        var appellido = $(this).attr("apellido");
+    
+        swal({
+            title: "Eliminar",
+            text: "¿Deseas eliminar a "+nombre+" "+appellido+"?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        }).then(function(confirm){
+            if(confirm){
+                //Envia los datos para delete.php
+                $.ajax({
+                    url:'include/delete.php',
+                    type:'get',
+                    data:{idd:id},
+                }) 
+
+                //Refresca la pagina
+                location.reload(true);
+
+                swal({
+                    title: "Eliminado",
+                    text: "¡"+nombre+" "+appellido+" ha sido eliminado!",
+                    icon: "success",
+                    buttons: false,
+                    timer: 3000,
+                });   
+            }
+            
+        })
+    
     })
-  
-})
+
 </script>

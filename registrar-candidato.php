@@ -43,7 +43,7 @@
                     <label for="nombre">Nombre*</label>
                     <input type="text" name="nombre" class="form-control form-control-lg" id="nombre" placeholder="Nombre" required="">
                     <div class="invalid-feedback">
-                        favor de ingresar el Nombre
+                        Ingrese el Nombre
                     </div>
                 </div>
 
@@ -59,7 +59,7 @@
                     <input type="text" name="apellidos" class="form-control form-control-lg" id="apellido" placeholder="Apellido" required>
                 
                     <div class="invalid-feedback">
-                        favor de ingresar el Apellido
+                        Ingrese el Apellido
                     </div>
                 </div>
             </div>
@@ -71,7 +71,7 @@
                     <input type="text" name="numero-estudiante" class="form-control form-control-lg" id="numero-estudiante" placeholder="Numero de estudiante" required>
                     
                     <div class="invalid-feedback">
-                        favor de ingresar el numero de estudiante
+                        Ingrese el numero de estudiante
                     </div>
                 </div>
 
@@ -94,7 +94,7 @@
                     </select>
                     
                     <div class="invalid-feedback">
-                        favor de escojer el departamento
+                        Ingrese el departamento
                     </div>
 
                 </div>
@@ -114,7 +114,7 @@
                     </select>
 
                     <div class="invalid-feedback">
-                    favor de escojer el puesto
+                    Ingrese el puesto
                     </div>
                 </div>
 
@@ -131,7 +131,7 @@
                     </select>
 
                     <div class="invalid-feedback">
-                        favor de escojer la posición
+                        Ingrese la posición
                     </div>
                 </div> 
 
@@ -152,13 +152,8 @@
                         <option value="2028" name="year">2028</option>
                     </select>
                     <div class="invalid-feedback">
-                        favor de escojer el año
+                        Ingrese el año
                     </div>
-
-                    <div class="invalid-feedback">
-                        Escoja Año*
-                    </div>
-
                 </div>
 
                 <!--Subir documento boton pequeno-->
@@ -171,9 +166,14 @@
 
             </div>  
                 
-            <button type="submit" id="submit" class="btn btn-primary custom-select-lg" 
-                name="registrar" style="margin-bottom: 90px" value="Submit" onclick="validacion()">Registrar Candidato
-            </button>
+            <div class="form-group">
+                <button type="submit" id="submit" class="btn btn-primary custom-select-lg" style="width: 150px; margin-right: 10px;" 
+                    name="registrar" style="margin-bottom: 90px" value="Submit" onclick="validacion()">Registrar
+                </button>
+
+                <button type="button" class="btn btn-secondary custom-select-lg" style="width: 150px" style="width: 150px"
+                name="cancelar" style="margin-left: 15px; margin-bottom: 90px" onclick="location.href='candidatos-registrados.php'" value="Back" >Cancelar</button>
+            </div>
         </form>
 
         <!--Java Script Library-->

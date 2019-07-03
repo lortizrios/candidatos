@@ -10,12 +10,6 @@
 
     $idDup = "Error: Numero de estudiante duplicado. Ingrese otro numero de estudiante.";       
 
-    //sessions
-    $update = $_SESSION['update']="Session['update'] Se guardaron los datos Linea 214";
-    $error_actualizar = $_SESSION['error_query_foto']= "Cacha error en query foto";
-    $error_guardar_foto = $_SESSION['error_guardar_foto']="No guardo foto en folder"; 
-    $validar_img = $_SESSION['validar_img']="Formato de img erroneo";
-
 
     if(isset($_POST['registrar'])){
 
@@ -61,12 +55,13 @@
                         if(!is_dir('../img_candidatos')){
                             mkdir('../img_candidatos', 0777);
                         }
+
                         //mueve la imagen del archivo temporal al archivo final
                         if($move = move_uploaded_file($archivo['tmp_name'],'../img_candidatos/'.$archivoName)){
-                            echo"Guardo la foto en el folder";
-                            var_dump($move);
-                            var_dump($archivoName);
-                            var_dump($archivo['tmp_name']);
+                            //echo"Guardo la foto en el folder";
+                            //var_dump($move);
+                            //var_dump($archivoName);
+                            //var_dump($archivo['tmp_name']);
 
                             //Conecta a la base datos
                             $con = conectarBD();
@@ -77,32 +72,26 @@
 
                             //valida si ejecuta query
                             if($query){
-                                ?><script>
-                                    alert('¡Candidato registrado con éxito!');
-                                </script><?php
+                                $_SESSION['candidato-registrado']="candidato-registrado query foto linea 75 de proceso.php";
                                 header("Location: $urlCan");
 
-                                //si no ejecuta imprime error
-                            }else{
-                                echo "Error: " . mysqli_errno($con) . ' - ' . mysqli_error($con)."\n";
-                                header("Refresh:5; url: $urlInd");
+                               
+                            }else{ //si no entra ejecuta imprime error
+                                //echo "Error: " . mysqli_errno($con) . ' - ' . mysqli_error($con)."\n";
+                                $_SESSION['error-registrar']="error registrar query foto linea 81 de proceso.php";
+                                header("Location: $urlCan");
                             }
 
-                        }else{?>
-                            <script>
-                                alert('Error al guardar la foto intente de nuevo.');
-                                window.history.back(-1);
-                            </script><?php
+                        }else{
+                            //echo"Entro error linea 86";
+                            $_SESSION['error-guardar-foto']="Registrar error guardar foto linea 86 de proceso.php";
+                            header("Location: $urlCan");
                         }
                         //Termina proceso de subir archivos----------------------------
-                        
-                        
-                        //formato incorrecto
-                    }else{?>
-                        <script>
-                            alert('Elija una imagen con el formato correcto. (JPG o JPEG)');
-                            history.back(-1);
-                        </script><?php
+                         
+                    }else{//Entra cuando el formato de foto en incorrecto
+                        $_SESSION['validar_img']="Imagen en formato incorrecto linea 95 de proceso.php";
+                        header("Location: $urlCan");
                     }
 
                     
@@ -117,30 +106,27 @@
                     var_dump($queryNull);
 
                     //valida si query ejecuto
-                    if($queryNull){ 
-                        ?><script>
-                            alert('¡Candidato registrado con éxito!');
-                        </script><?php
+                    if(!$queryNull){ 
+                        $_SESSION['candidato-registrado']="candidato-registrado query sin foto linea 110 de proceso.php";
                         header("Location: $urlCan");
 
                      //no ejecuta el query imprime error
                     }else{
-                        echo "Error: " . mysqli_errno($con) . ' - ' . mysqli_error($con)."\n";
-                        header("Refresh: 4; url= $urlInd");
-                        
+                        $_SESSION['error-registrar']="error registrar sin foto linea 115 de proceso.php";
+                        //echo "Error: " . mysqli_errno($con) . ' - ' . mysqli_error($con)."\n";
+                        header("Location: $urlCan");
                     }
                 }
-
             }else{
-                ?><script>
-                    alert("<?php echo $idDup; ?>");
-                    history.back(-1);
-                </script><?php
+                $_SESSION['estudiante-duplicado'] = "Error: Numero de estudiante duplicado linea 121 de proceso.php";
+                header("Location: $urlCan");
             }
    
         }else{
-            echo "Error: " . mysqli_errno($con) . ' - ' . mysqli_error($con);
-            header("Refresh: 5; url= $urlInd");
+            //echo "Error: " . mysqli_errno($con) . ' - ' . mysqli_error($con);
+
+            $_SESSION['error-registrar']="error registrar prepare linea 128 de proceso.php";
+            header("Location: $urlCan");
         }
 
         //Cierra conexion
@@ -209,15 +195,16 @@
                     //valida que se actualicen los datos del 
                     if($qf = mysqli_query($con,$query_foto)){
                         //var_dump($qf);
-                        echo "entro al query_foto";
+                        //echo"entro al query_foto";
                         //var_dump($id_post);
                         //Variables para cachar errores o validaciones
-                        $update;
+                        $_SESSION['update']="Session['update'] Se guardaron los datos linea 201 de proceso.php";
+                       
                         //var_dump($update);
                         header("Location:$urlCan");
                         
                     }else{
-                        $error_actualizar;
+                        $_SESSION['error_actualizar']="Error al actualizar los datos linea 207 de proceso.php";
                         //var_dump($error_querry);
                         //imprime el error de la conexion
                         //echo "Error: " . mysqli_errno($con) . ' - ' . mysqli_error($con); 
@@ -225,19 +212,22 @@
                     }
 
                 }else{
-                    $error_guardar_foto;
+                    //Variables para cachar errores o validaciones
+                    $_SESSION['error-guardar-foto']="No guardo foto en folder linea 216 de proceso.php"; 
                     //var_dump($error_guardar_foto);
                     header("Location: $urlCan");
                 }
                 
                 
             }else{
-                $validar_img;
+                //Variables para cachar errores o validaciones
+                $_SESSION['validar_img']="Formato de img erroneo linea 224 de proceso.php";
                 header("Location: $urlCan");
             }
         
-            //Si no tiene foto corre esta logica
-        }else{
+            
+        }else{//Si no tiene foto corre esta logica
+            
             //Conecta a base de datos
             $con;
               
@@ -248,13 +238,12 @@
             if($qfv = mysqli_query($con,$query_foto_vacia)){
                 //var_dump($qfv);
                 //echo "entro al query_foto_vacia linea 249";
-                $update;
+                $_SESSION['update']="Session['update'] Se guardaron los datos Linea 214 en proceso.php";
                 header("Location: $urlCan");
             }else{
                 //imprime el error de la conexion
-                echo "Error: " . mysqli_errno($con) . ' - ' . mysqli_error($con); 
-                echo"Proceso linea 255";
-                $error_actualizar;
+                //echo "Error: " . mysqli_errno($con) . ' - ' . mysqli_error($con); 
+                $_SESSION['error_actualizar']= "Error al actualizar los datos linea 246 de proceso.php";
                 header("Location: $urlCan");
             }
         }

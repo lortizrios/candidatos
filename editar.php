@@ -514,7 +514,7 @@
         name="update" style="margin-bottom: 90px" value="Submit">Guardar</button> 
         
         <button type="button" class="btn btn-secondary custom-select-lg" style="width: 150px"
-        name="cancelar" style="margin-left: 15px; margin-bottom: 90px" onclick="goBack();" value="Back" >Cancelar</button>
+        name="cancelar" style="margin-left: 15px; margin-bottom: 90px" onclick="location.href='candidatos-registrados.php'" value="Back" >Cancelar</button>
       </div> 
     </form>
      
